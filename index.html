@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sourabh Patel | Oracle Fusion Technical Consultant</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --white: #ffffff;
+  --off-white: #f8f7f5;
+  --light-gray: #f0eeeb;
+  --mid-gray: #d4d0c8;
+  --text-muted: #8a8680;
+  --text-body: #3a3835;
+  --text-dark: #1a1917;
+  --accent: #2c5282;
+  --accent-light: #ebf0f8;
+  --accent-mid: #4a7ab5;
+  --gold: #b8973a;
+  --gold-light: #f9f3e3;
+  --border: #e8e5df;
+  --shadow: 0 2px 20px rgba(0,0,0,0.06);
+  --shadow-hover: 0 8px 40px rgba(0,0,0,0.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--text-body);line-height:1.7;}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--light-gray);}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(248,247,245,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 5%;}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--text-dark);letter-spacing:0.01em;}
+.nav-logo span{color:var(--accent);}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{font-size:0.82rem;font-weight:500;color:var(--text-muted);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s;}
+.nav-links a:hover{color:var(--accent);}
+.nav-cta{background:var(--accent);color:#fff;padding:8px 20px;border-radius:4px;font-size:0.8rem;font-weight:500;text-decoration:none;letter-spacing:0.04em;transition:background 0.2s;}
+.nav-cta:hover{background:var(--accent-mid);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text-dark);border-radius:2px;transition:all 0.3s;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:100px 5% 60px;background:var(--white);position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:var(--accent-light);border-radius:50%;opacity:0.5;z-index:0;}
+.hero::after{content:'';position:absolute;bottom:-80px;left:-60px;width:300px;height:300px;background:var(--gold-light);border-radius:50%;opacity:0.6;z-index:0;}
+.hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--accent-light);color:var(--accent);padding:6px 14px;border-radius:20px;font-size:0.75rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:20px;}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(1.4);}}
+h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.8rem);font-weight:700;color:var(--text-dark);line-height:1.15;margin-bottom:16px;}
+h1 span{color:var(--accent);}
+.hero-subtitle{font-size:1rem;color:var(--text-muted);margin-bottom:28px;max-width:460px;line-height:1.8;}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px;}
+.hero-tag{background:var(--light-gray);color:var(--text-body);padding:5px 12px;border-radius:3px;font-size:0.75rem;font-weight:500;border:1px solid var(--border);}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-primary{background:var(--accent);color:#fff;padding:12px 28px;border-radius:4px;text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:0.03em;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px;}
+.btn-primary:hover{background:var(--accent-mid);transform:translateY(-1px);box-shadow:var(--shadow-hover);}
+.btn-outline{border:1.5px solid var(--accent);color:var(--accent);padding:12px 28px;border-radius:4px;text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:0.03em;transition:all 0.2s;}
+.btn-outline:hover{background:var(--accent-light);}
+.hero-right{display:flex;justify-content:center;}
+.profile-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:36px;box-shadow:var(--shadow);text-align:center;max-width:300px;width:100%;}
+.avatar{width:100px;height:100px;background:linear-gradient(135deg,var(--accent) 0%,var(--accent-mid) 100%);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:#fff;}
+.profile-name{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--text-dark);margin-bottom:6px;}
+.profile-role{font-size:0.8rem;color:var(--text-muted);margin-bottom:20px;line-height:1.5;}
+.profile-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+.stat{background:var(--off-white);border-radius:8px;padding:12px 8px;text-align:center;}
+.stat-num{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--accent);}
+.stat-label{font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.04em;}
+.profile-link{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:#fff;padding:10px 16px;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:500;transition:background 0.2s;}
+.profile-link:hover{background:var(--accent-mid);}
+.linkedin-icon{width:16px;height:16px;fill:#fff;}
+
+/* SECTIONS */
+section{padding:90px 5%;}
+.section-inner{max-width:1100px;margin:0 auto;}
+.section-label{font-size:0.72rem;font-weight:500;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:700;color:var(--text-dark);margin-bottom:48px;line-height:1.2;}
+.section-title span{color:var(--accent);}
+
+/* ABOUT */
+#about{background:var(--off-white);}
+.about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:start;}
+.about-text p{font-size:0.95rem;color:var(--text-body);line-height:1.9;margin-bottom:16px;}
+.about-highlights{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px;}
+.highlight{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:16px;border-left:3px solid var(--accent);}
+.highlight-title{font-size:0.78rem;font-weight:500;color:var(--accent);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;}
+.highlight-val{font-size:0.88rem;color:var(--text-dark);}
+.about-info{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:28px;}
+.info-item{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);font-size:0.85rem;}
+.info-item:last-child{border-bottom:none;}
+.info-label{color:var(--text-muted);font-weight:500;}
+.info-val{color:var(--text-dark);font-weight:500;text-align:right;}
+
+/* SKILLS */
+#skills{background:var(--white);}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;}
+.skill-card{background:var(--off-white);border:1px solid var(--border);border-radius:10px;padding:24px;transition:all 0.25s;}
+.skill-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);border-color:var(--accent);}
+.skill-icon{width:40px;height:40px;background:var(--accent-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:14px;}
+.skill-cat{font-size:0.75rem;font-weight:500;color:var(--accent);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px;}
+.skill-list{display:flex;flex-wrap:wrap;gap:6px;}
+.skill-pill{background:var(--white);border:1px solid var(--border);color:var(--text-body);padding:4px 10px;border-radius:3px;font-size:0.75rem;font-weight:400;}
+
+/* EXPERIENCE */
+#experience{background:var(--off-white);}
+.timeline{position:relative;padding-left:28px;}
+.timeline::before{content:'';position:absolute;left:0;top:6px;bottom:6px;width:2px;background:linear-gradient(to bottom,var(--accent),var(--mid-gray));}
+.timeline-item{position:relative;margin-bottom:44px;}
+.timeline-item::before{content:'';position:absolute;left:-34px;top:6px;width:12px;height:12px;background:var(--accent);border-radius:50%;border:2px solid var(--white);}
+.timeline-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:28px;box-shadow:var(--shadow);transition:box-shadow 0.2s;}
+.timeline-card:hover{box-shadow:var(--shadow-hover);}
+.tl-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:6px;}
+.tl-role{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--text-dark);}
+.tl-date{background:var(--accent-light);color:var(--accent);padding:4px 12px;border-radius:20px;font-size:0.72rem;font-weight:500;white-space:nowrap;}
+.tl-company{font-size:0.82rem;color:var(--text-muted);margin-bottom:14px;}
+.tl-company strong{color:var(--accent);}
+.tl-desc{font-size:0.87rem;line-height:1.8;color:var(--text-body);}
+.tl-desc ul{margin-top:10px;padding-left:18px;}
+.tl-desc li{margin-bottom:6px;}
+.tl-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
+.tl-tag{background:var(--light-gray);color:var(--text-muted);padding:3px 10px;border-radius:3px;font-size:0.72rem;}
+
+/* PROJECTS */
+#projects{background:var(--white);}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;}
+.project-card{background:var(--off-white);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:all 0.25s;}
+.project-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);}
+.project-header{background:linear-gradient(135deg,var(--accent) 0%,var(--accent-mid) 100%);padding:24px;position:relative;overflow:hidden;}
+.project-header::after{content:'';position:absolute;top:-20px;right:-20px;width:80px;height:80px;background:rgba(255,255,255,0.08);border-radius:50%;}
+.project-num{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:rgba(255,255,255,0.15);position:absolute;top:10px;right:20px;}
+.project-client{font-size:0.72rem;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;}
+.project-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#fff;}
+.project-body{padding:24px;}
+.project-duration{font-size:0.75rem;color:var(--text-muted);margin-bottom:10px;}
+.project-desc{font-size:0.85rem;color:var(--text-body);line-height:1.8;margin-bottom:16px;}
+.project-modules{margin-bottom:14px;}
+.project-modules-title{font-size:0.72rem;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;}
+.module-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.module-tag{background:var(--accent-light);color:var(--accent);padding:3px 10px;border-radius:3px;font-size:0.72rem;font-weight:500;}
+.tech-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.tech-tag{background:var(--white);border:1px solid var(--border);color:var(--text-muted);padding:3px 10px;border-radius:3px;font-size:0.72rem;}
+
+/* EDUCATION */
+#education{background:var(--off-white);}
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+.edu-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:28px;transition:all 0.25s;position:relative;overflow:hidden;}
+.edu-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--accent),var(--accent-mid));}
+.edu-card:hover{box-shadow:var(--shadow-hover);}
+.edu-icon{font-size:1.8rem;margin-bottom:14px;}
+.edu-degree{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--text-dark);margin-bottom:6px;}
+.edu-school{font-size:0.85rem;color:var(--accent);margin-bottom:4px;font-weight:500;}
+.edu-year{font-size:0.78rem;color:var(--text-muted);}
+
+/* ACHIEVEMENTS */
+#achievements{background:var(--white);}
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+.ach-card{background:var(--gold-light);border:1px solid #e8d99a;border-radius:10px;padding:28px;display:flex;gap:16px;align-items:flex-start;transition:all 0.25s;}
+.ach-card:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(184,151,58,0.15);}
+.ach-icon{width:44px;height:44px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.ach-title{font-size:0.9rem;font-weight:500;color:var(--text-dark);margin-bottom:4px;line-height:1.4;}
+.ach-issuer{font-size:0.78rem;color:var(--text-muted);}
+
+/* CONTACT */
+#contact{background:var(--off-white);}
+.contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:60px;align-items:start;}
+.contact-info h3{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--text-dark);margin-bottom:16px;}
+.contact-info p{font-size:0.9rem;color:var(--text-muted);line-height:1.8;margin-bottom:28px;}
+.contact-item{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+.contact-icon{width:42px;height:42px;background:var(--accent-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+.contact-label{font-size:0.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px;}
+.contact-val{font-size:0.88rem;color:var(--text-dark);font-weight:500;}
+.contact-val a{color:var(--accent);text-decoration:none;}
+.contact-val a:hover{text-decoration:underline;}
+.contact-form{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:36px;}
+.form-group{margin-bottom:18px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+label{display:block;font-size:0.75rem;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;}
+input,textarea,select{width:100%;background:var(--off-white);border:1.5px solid var(--border);border-radius:6px;padding:10px 14px;font-family:'DM Sans',sans-serif;font-size:0.88rem;color:var(--text-dark);outline:none;transition:border-color 0.2s;}
+input:focus,textarea:focus{border-color:var(--accent);background:var(--white);}
+textarea{resize:vertical;min-height:110px;}
+.form-btn{width:100%;background:var(--accent);color:#fff;border:none;padding:13px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:500;cursor:pointer;transition:background 0.2s;letter-spacing:0.02em;}
+.form-btn:hover{background:var(--accent-mid);}
+
+/* FOOTER */
+footer{background:var(--text-dark);color:rgba(255,255,255,0.5);text-align:center;padding:28px 5%;font-size:0.8rem;}
+footer strong{color:rgba(255,255,255,0.8);}
+footer a{color:var(--accent-mid);text-decoration:none;}
+
+/* FADE IN ANIMATION */
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .hero-inner,.about-grid,.contact-grid{grid-template-columns:1fr;}
+  .hero-right{display:none;}
+  .about-highlights{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .nav-links,.nav-cta{display:none;}
+  .hamburger{display:flex;}
+  .mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);padding:20px 5%;z-index:99;}
+  .mobile-menu.open{display:block;}
+  .mobile-menu a{display:block;padding:12px 0;color:var(--text-body);text-decoration:none;border-bottom:1px solid var(--border);font-size:0.9rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Sourabh<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="mailto:sourabh@email.com" class="nav-cta">Hire Me</a>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#skills" onclick="toggleMenu()">Skills</a>
+  <a href="#experience" onclick="toggleMenu()">Experience</a>
+  <a href="#projects" onclick="toggleMenu()">Projects</a>
+  <a href="#education" onclick="toggleMenu()">Education</a>
+  <a href="#achievements" onclick="toggleMenu()">Achievements</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-left fade-up">
+      <div class="hero-badge">Available for New Opportunities</div>
+      <h1>Sourabh<br/><span>Patel</span></h1>
+      <p class="hero-subtitle">Oracle Fusion Technical Consultant with 3+ years of experience in Oracle Cloud, BI Publisher, P2P, Data Reconciliation & REST APIs.</p>
+      <div class="hero-tags">
+        <span class="hero-tag">Oracle Fusion Cloud</span>
+        <span class="hero-tag">BI Publisher</span>
+        <span class="hero-tag">OTBI</span>
+        <span class="hero-tag">P2P</span>
+        <span class="hero-tag">SQL</span>
+        <span class="hero-tag">REST APIs</span>
+        <span class="hero-tag">Oracle ATP DB</span>
+      </div>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">Get In Touch ↓</a>
+        <a href="#projects" class="btn-outline">View Projects</a>
+      </div>
+    </div>
+    <div class="hero-right fade-up">
+      <div class="profile-card">
+        <div class="avatar">SP</div>
+        <div class="profile-name">Sourabh Patel</div>
+        <div class="profile-role">Oracle Fusion Technical Consultant<br/>Oracle Cloud | BI Publisher | SQL</div>
+        <div class="profile-stats">
+          <div class="stat">
+            <div class="stat-num">3+</div>
+            <div class="stat-label">Years Exp.</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">2</div>
+            <div class="stat-label">Projects</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">2</div>
+            <div class="stat-label">OCI Certs</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">5+</div>
+            <div class="stat-label">Tech Skills</div>
+          </div>
+        </div>
+        <a href="https://www.linkedin.com/in/sourabh-patel" target="_blank" class="profile-link">
+          <svg class="linkedin-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          Connect on LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">Who I Am</div>
+    <h2 class="section-title">About <span>Me</span></h2>
+    <div class="about-grid fade-up">
+      <div class="about-text">
+        <p>I am Sourabh Patel, an Oracle Fusion Technical Consultant with over 3 years of hands-on experience in Oracle Cloud Applications. I began my career as an Intern and was converted to a full-time consultant based on consistent performance and technical contributions.</p>
+        <p>My expertise spans across Oracle Fusion Cloud Applications, particularly in the Procurement and Financial modules. I have deep hands-on experience with the end-to-end Procure-to-Pay (P2P) lifecycle — from Requisition and Purchase Orders through to Invoice and Payment processing.</p>
+        <p>I am passionate about solving complex data problems, building reliable BI Publisher reports, and ensuring data integrity across large-scale Oracle migration projects. I thrive in cross-functional teams and enjoy collaborating with both technical and functional stakeholders.</p>
+        <div class="about-highlights">
+          <div class="highlight">
+            <div class="highlight-title">Current Role</div>
+            <div class="highlight-val">Oracle Fusion Technical Consultant</div>
+          </div>
+          <div class="highlight">
+            <div class="highlight-title">Company</div>
+            <div class="highlight-val">Consster</div>
+          </div>
+          <div class="highlight">
+            <div class="highlight-title">Experience</div>
+            <div class="highlight-val">3+ Years (Jan 2023 – Present)</div>
+          </div>
+          <div class="highlight">
+            <div class="highlight-title">Specialization</div>
+            <div class="highlight-val">Oracle Cloud, P2P, Data Reconciliation</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-info">
+        <div class="info-item"><span class="info-label">Full Name</span><span class="info-val">Sourabh Patel</span></div>
+        <div class="info-item"><span class="info-label">Role</span><span class="info-val">Oracle Fusion Technical Consultant</span></div>
+        <div class="info-item"><span class="info-label">Company</span><span class="info-val">Consster</span></div>
+        <div class="info-item"><span class="info-label">Experience</span><span class="info-val">3+ Years</span></div>
+        <div class="info-item"><span class="info-label">Education</span><span class="info-val">MCA – Shri Krishna University</span></div>
+        <div class="info-item"><span class="info-label">Certifications</span><span class="info-val">OCI 2025 (2 Certs)</span></div>
+        <div class="info-item"><span class="info-label">LinkedIn</span><span class="info-val"><a href="https://www.linkedin.com/in/sourabh-patel" target="_blank" style="color:var(--accent);">linkedin.com/in/sourabh-patel</a></span></div>
+        <div class="info-item"><span class="info-label">Availability</span><span class="info-val" style="color:green;font-weight:600;">Open to Opportunities</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">What I Know</div>
+    <h2 class="section-title">Technical <span>Skills</span></h2>
+    <div class="skills-grid fade-up">
+      <div class="skill-card">
+        <div class="skill-icon">📊</div>
+        <div class="skill-cat">Reports & Analytics</div>
+        <div class="skill-list">
+          <span class="skill-pill">BI Publisher (BIP)</span>
+          <span class="skill-pill">OTBI Reports</span>
+          <span class="skill-pill">Interactive Dashboards</span>
+          <span class="skill-pill">Data Models</span>
+          <span class="skill-pill">Reconciliation Reports</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🔗</div>
+        <div class="skill-cat">Integrations & APIs</div>
+        <div class="skill-list">
+          <span class="skill-pill">REST APIs</span>
+          <span class="skill-pill">SOAP Web Services</span>
+          <span class="skill-pill">Postman</span>
+          <span class="skill-pill">Oracle OIC (Learning)</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">☁️</div>
+        <div class="skill-cat">Oracle Tools & Migration</div>
+        <div class="skill-list">
+          <span class="skill-pill">Oracle Fusion Cloud</span>
+          <span class="skill-pill">FBDI</span>
+          <span class="skill-pill">Oracle ATP Database</span>
+          <span class="skill-pill">Data Import/Export</span>
+          <span class="skill-pill">PuTTY / Unix</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🗃️</div>
+        <div class="skill-cat">Database & Scripting</div>
+        <div class="skill-list">
+          <span class="skill-pill">SQL</span>
+          <span class="skill-pill">SQL Developer</span>
+          <span class="skill-pill">SQL*Loader</span>
+          <span class="skill-pill">Data Validation</span>
+          <span class="skill-pill">Data Transformation</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🏢</div>
+        <div class="skill-cat">ERP Modules</div>
+        <div class="skill-list">
+          <span class="skill-pill">Oracle Cloud Procurement</span>
+          <span class="skill-pill">Procure-to-Pay (P2P)</span>
+          <span class="skill-pill">Order-to-Cash (O2C)</span>
+          <span class="skill-pill">Fixed Assets (FA)</span>
+          <span class="skill-pill">Inventory / OPM / OM</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">⚙️</div>
+        <div class="skill-cat">Platforms & Environments</div>
+        <div class="skill-list">
+          <span class="skill-pill">Oracle EBS R12</span>
+          <span class="skill-pill">Oracle Fusion Cloud</span>
+          <span class="skill-pill">Oracle Support Portal</span>
+          <span class="skill-pill">Linux/Unix CLI</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label">My Journey</div>
+    <h2 class="section-title">Work <span>Experience</span></h2>
+    <div class="timeline fade-up">
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="tl-top">
+            <div class="tl-role">Oracle Fusion Technical Consultant</div>
+            <div class="tl-date">Jan 2023 – Present</div>
+          </div>
+          <div class="tl-company"><strong>Consster</strong> · Full-time · 3+ Years</div>
+          <div class="tl-desc">
+            Working as an Oracle Fusion Technical Consultant handling end-to-end Oracle Cloud implementation, data reconciliation, conversion, and reporting across P2P, O2C, and Fixed Assets modules. Started as an Intern and promoted to full-time consultant based on consistent performance.
+          </div>
+          <div class="tl-tags">
+            <span class="tl-tag">Oracle Fusion Cloud</span>
+            <span class="tl-tag">BI Publisher</span>
+            <span class="tl-tag">SQL</span>
+            <span class="tl-tag">P2P</span>
+            <span class="tl-tag">REST APIs</span>
+            <span class="tl-tag">Oracle ATP DB</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label">What I've Built</div>
+    <h2 class="section-title">Key <span>Projects</span></h2>
+    <div class="projects-grid fade-up">
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-num">01</div>
+          <div class="project-client">Client: GXO Logistics · Partner: Gyansys</div>
+          <div class="project-title">Data Reconciliation & Conversion — Oracle Fusion to ATP DB</div>
+        </div>
+        <div class="project-body">
+          <div class="project-duration">📅 Oct 2024 – Present &nbsp;|&nbsp; Role: Technical Consultant</div>
+          <div class="project-desc">End-to-end extraction, reconciliation, and transformation of financial and procurement data from Oracle Fusion and Oracle EBS into Oracle ATP Database for downstream reporting. Supported FBDI data handoff to Grant Thornton.</div>
+          <div class="project-modules">
+            <div class="project-modules-title">Modules</div>
+            <div class="module-tags">
+              <span class="module-tag">P2P</span>
+              <span class="module-tag">O2C</span>
+              <span class="module-tag">Fixed Assets</span>
+            </div>
+          </div>
+          <div class="tech-tags">
+            <span class="tech-tag">Oracle Fusion</span>
+            <span class="tech-tag">Oracle EBS</span>
+            <span class="tech-tag">BI Publisher</span>
+            <span class="tech-tag">Oracle ATP</span>
+            <span class="tech-tag">SQL</span>
+            <span class="tech-tag">FBDI</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-num">02</div>
+          <div class="project-client">Client: Cognida</div>
+          <div class="project-title">Oracle EBS Integration — Cognida to Oracle EBS R12</div>
+        </div>
+        <div class="project-body">
+          <div class="project-duration">📅 Jan 2023 – Sep 2024 &nbsp;|&nbsp; Role: Technical Consultant</div>
+          <div class="project-desc">Executed end-to-end data conversion and migration within Oracle EBS R12. Migrated data between Oracle instances using PuTTY and Unix/Linux. Loaded legacy data via standard Oracle interfaces, APIs, and SQL*Loader. Developed and customized OM reports and provided production support.</div>
+          <div class="project-modules">
+            <div class="project-modules-title">Modules</div>
+            <div class="module-tags">
+              <span class="module-tag">Inventory</span>
+              <span class="module-tag">OPM</span>
+              <span class="module-tag">Order Management</span>
+            </div>
+          </div>
+          <div class="tech-tags">
+            <span class="tech-tag">Oracle EBS R12</span>
+            <span class="tech-tag">SQL*Loader</span>
+            <span class="tech-tag">PuTTY</span>
+            <span class="tech-tag">Unix/Linux</span>
+            <span class="tech-tag">SQL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-label">Academic Background</div>
+    <h2 class="section-title">Education</h2>
+    <div class="edu-grid fade-up">
+      <div class="edu-card">
+        <div class="edu-icon">🎓</div>
+        <div class="edu-degree">Master of Computer Application (MCA)</div>
+        <div class="edu-school">Shri Krishna University, Chhatarpur</div>
+        <div class="edu-year">Madhya Pradesh, India</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-inner">
+    <div class="section-label">Credentials</div>
+    <h2 class="section-title">Awards & <span>Certifications</span></h2>
+    <div class="ach-grid fade-up">
+      <div class="ach-card">
+        <div class="ach-icon">🏅</div>
+        <div>
+          <div class="ach-title">Oracle Cloud Infrastructure (OCI) 2025 Certified Data Science Professional</div>
+          <div class="ach-issuer">Oracle Corporation · 2025</div>
+        </div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon">🏅</div>
+        <div>
+          <div class="ach-title">Oracle Cloud Infrastructure (OCI) 2025 Certified AI Foundations Associate</div>
+          <div class="ach-issuer">Oracle Corporation · 2025</div>
+        </div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon">⭐</div>
+        <div>
+          <div class="ach-title">Promoted from Intern to Full-Time Consultant</div>
+          <div class="ach-issuer">Consster · Based on consistent performance</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">Let's Connect</div>
+    <h2 class="section-title">Get In <span>Touch</span></h2>
+    <div class="contact-grid fade-up">
+      <div class="contact-info">
+        <h3>Open to New Opportunities</h3>
+        <p>I am actively looking for new Oracle Fusion / Oracle Cloud roles. Whether you have a full-time position, contract work, or just want to connect — feel free to reach out. I respond within 24 hours.</p>
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-val"><a href="mailto:sourabh@email.com">sourabh@email.com</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Location</div>
+            <div class="contact-val">Madhya Pradesh, India</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">💼</div>
+          <div>
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-val"><a href="https://www.linkedin.com/in/sourabh-patel" target="_blank">linkedin.com/in/sourabh-patel</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🏢</div>
+          <div>
+            <div class="contact-label">Current Company</div>
+            <div class="contact-val">Consster</div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" placeholder="John Smith"/>
+          </div>
+          <div class="form-group">
+            <label>Your Email</label>
+            <input type="email" placeholder="john@company.com"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" placeholder="Job Opportunity / Collaboration"/>
+        </div>
+        <div class="form-group">
+          <label>Company / Organization</label>
+          <input type="text" placeholder="Your Company Name"/>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Tell me about the role or how you'd like to work together..."></textarea>
+        </div>
+        <button class="form-btn" onclick="handleSubmit()">Send Message →</button>
+        <p id="form-msg" style="margin-top:12px;font-size:0.82rem;color:green;display:none;text-align:center;">✓ Message sent! I'll get back to you within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <strong>Sourabh Patel</strong> · Oracle Fusion Technical Consultant &nbsp;|&nbsp; Built for professional use &nbsp;|&nbsp; <a href="https://www.linkedin.com/in/sourabh-patel" target="_blank">LinkedIn</a></p>
+</footer>
+
+<script>
+// Mobile menu
+function toggleMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// Fade-up on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold: 0.1});
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Active nav link highlight
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if(window.scrollY >= s.offsetTop - 80) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#'+current ? 'var(--accent)' : '';
+  });
+});
+
+// Form submit
+function handleSubmit(){
+  const msg = document.getElementById('form-msg');
+  msg.style.display = 'block';
+  setTimeout(() => msg.style.display = 'none', 5000);
+}
+</script>
+</body>
+</html>
